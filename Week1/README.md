@@ -6,25 +6,41 @@
 
 ## 전체 흐름
 
-1. 데이터 벡터화 : 문자는 원핫인코딩으로 따로 처리해야 나머지와 합친다 + 나머지 정규화 (df)
+1. 데이터 벡터화 : 문자는 원핫인코딩으로 따로 처리한 후 나머지와 합친다 + 나머지 정규화 (df)
 2. to_numpy해서 한 번에 거리 계산 후 원래 df에 붙임
-3. dot해서 크기로 나눠서 코사인 유사도 계산 -> 코사인 거리 계산 후 원래 df에 합
+3. dot해서 크기로 나눠서 코사인 유사도 계산 -> 코사인 거리 계산 후 원래 df에 합침
 4. 거리 기준 정렬 (sort_values)
-
-## 주요 개념
-
-- DataFrame
-- One-hot Encoding
-- Feature Scaling
-- Vector Representation
-- Euclidean Distance, Cosine Distance
-- NumPy Broadcasting
-- loc, iloc
 
 ## 배운 것
 
 - 서로 다른 범위의 수치 데이터를 비교할 땐 Scaling한다
-- 문자 데이터는 원핫인코딩으로 베터로 표현한다
+- 문자 데이터는 원핫인코딩으로 베터로 표현한다 -> get_dummies 사
 - Series를 to_numpy해서(ndarray로) 벡터 연산한다
 - Euclidean distance와 cosine distance로 벡터의 유사도를 비교한다
-- for문으로 하나씩 계산 ㄱㄴ but broadcasting으로 여러 벡터의 거리 한번에 계산 ㄱㄴ하다
+- for문으로 하나씩 계산 ㄱㄴ but broadcasting으로 여러 벡터의 거리 한번에 싹 계산 ㄱㄴ하다
+- df/배열을 concat할때 axis=1하면 열방향으로 바로 옆에 이어붙일 수 있음
+- 판다스 객체를 그냥 벡터로 바꿔서 계산하려고 to_numpy한다
+- .reset_index(drop=True) : 원래 인덱스 버리고 다시 순서대로 번호 매긴다
+
+
+
+
+
+
+# 1일차 실습-2 : 이미지 간의 유사도 측정
+
+## 실습 목적
+
+이미지를 벡터로 변환하여 계산해서 유사도를 측정한다
+
+## 전체 흐름
+
+1. 이미지 형식을 통일 (RGB, 크기)
+2. 이미지를 numpy 배열로 바꾸고 scaling
+3. 그걸 1차원 벡터로 flatten
+4. 코사인 유사도 계산
+
+## 배운 것
+- 이미지를 픽셀값을 이용해 고차원 벡터로 표현할 수 있다
+- PIL에서 Image import해서 이미지 불러오기 + 이미지 크기와 색상 형식 통일할 수 있다
+- 이미지를 1차원 벡터로 flatten하여 각 이미지를 하나의 feature vector로 보고 계산할 수 있다
